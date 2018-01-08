@@ -8,5 +8,6 @@ bsObj = BeautifulSoup(html, "html.parser")
 
 # for child in bsObj.find("table", {"id": "giftList"}).children: #查找id为giftList的table标签的下一级标签，即tr标签
 #     print(child)
-for sibling in bsObj.find("table", {"id": "giftList"}).tr.next_siblings: #查找id为giftList的table标签的兄弟标签，即除自身之外的tr标签
-    print(sibling)
+# for sibling in bsObj.find("table", {"id": "giftList"}).tr.next_siblings: #查找id为giftList的table标签的兄弟标签，即除自身之外的tr标签
+#     print(sibling)
+print(bsObj.find("img", {"src": "../img/gifts/img1.jpg"}).parent.previous_sibling.get_text()) #寻找图片商品对应的价格
