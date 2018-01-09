@@ -1,10 +1,13 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 __author__ = 'lenovo'
 from bs4 import BeautifulSoup
 import urllib2 as u
 import random
 import re
 import datetime
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf8')
 
 pages = set()
 random.seed(datetime.datetime.now())
@@ -15,9 +18,9 @@ def getInternalLinks(bsObj, includeUrl):
     #找出所有以“/”开头的链接
     for link in bsObj.findAll("a", href=re.compile("^(/|.*"+includeUrl+")")):
         if link.attrs["href"] is not None:
-            href = "http://" + re.sub("^(.|/)+", "", link.attrs["href"])
-            if href not in internalLinks:
-                internalLinks.append(href)
+            # href = "http://" + re.sub("^(.|/)+", "", link.attrs["href"])
+            if link.attrs["href"] not in internalLinks:
+                internalLinks.append(link.attrs["href"])
     return internalLinks
 
 # 获取页面所有外链的列表
@@ -56,7 +59,23 @@ def followExternalOnly(startingSite):
     except (u.HTTPError,ValueError,u.URLError):
         print None
         followExternalOnly(startingSite)
-followExternalOnly("http://oreilly.com")
+allExLinks = set()
+allInLinks = set()
+def getAllExternalLinks(siteUrl):
+    html = u.urlopen(siteUrl)
+    bsObj = BeautifulSoup(html, "html.parser")
+    internalLinks = getInternalLinks(bsObj,splitAddress(siteUrl)[0])
+    externalLinks = getExternalLinks(bsObj,splitAddress(siteUrl)[0])
+    for link in externalLinks:
+        if link not in allExLinks:
+            print("即将获取外部链接的URL是："+link)
+            allExLinks.add(link)
+    for link in internalLinks:
+        if link not in allInLinks:
+            print("即将获取内部链接的URL是："+link)
+            allInLinks.add(link)
+getAllExternalLinks("http://oreilly.com")
+
 
 
 
