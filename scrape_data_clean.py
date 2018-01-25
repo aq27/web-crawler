@@ -27,7 +27,7 @@ def ngram(input, n):
     output = {}
     for i in range(len(input)-n+1):
         print input[i:i+n]
-        output[str(input[i:i+n])] = output.setdefault(str(input[i:i+n]), 0)+1 #截取input每n个词,存放到output中
+        output[str(input[i:i+n])] = output.setdefault(str(input[i:i+n]), 0)+1 #截取input每n个词,存放到output中,并统计词频
 
     return output
 
