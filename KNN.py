@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'lenovo'
 
+#KNN算法-一种有监督的分类算法。根据待分类的样本与训练样本的距离大小来选取最近邻，其分类结果由最近邻的一个或几个样本的类别来决定。
 from numpy import *
 import operator
 
