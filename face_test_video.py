@@ -31,7 +31,7 @@ while success:
                 cv2.rectangle(frame, (x, y), (x+w, y+h), color, 1)#(x, y)表示矩形框的左上点坐标，(x+w, y+h)表示矩形框的右下点坐标，color表示矩形框的颜色，1表示矩形框的宽度
 
     cv2.imshow("test", frame)#显示图像，test为窗口名，而sample_image为显示图像
-    cv2.imwrite('detect.jpg', frame)
+    # cv2.imwrite('detect.jpg', frame)
     key = cv2.waitKey(10)
     c = chr(key & 255)
     if c in ['q', 'Q', chr(27)]:
